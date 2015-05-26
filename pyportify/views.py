@@ -10,6 +10,8 @@ from gmusicapi import Mobileclient
 import spotify
 
 monkey.patch_all()
+import requests
+requests.packages.urllib3.disable_warnings()
 
 app = Flask(__name__)
 app.config['PORT'] = 3132
@@ -52,7 +54,7 @@ class UserScope(object):
                                 self._connection_state_listener)
 
     def google_login(self, username, password):
-        self._google_loggedin = self.googleapi.login(username, password)
+        self._google_loggedin = self.googleapi.login(username, password, "1234567890abcdef")
         return self._google_loggedin
 
     def spotify_login(self, username, password):
